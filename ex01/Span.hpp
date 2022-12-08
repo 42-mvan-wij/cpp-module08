@@ -4,8 +4,10 @@
 # include <vector>
 
 class Span {
-	public:
+	private:
 		Span();
+
+	public:
 		Span(unsigned int n);
 		virtual ~Span();
 

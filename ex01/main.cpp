@@ -1,10 +1,11 @@
 #include <iostream>
+#include <cstdlib>
+#include <cassert>
 #include "Span.hpp"
 
-__attribute__((destructor))
 void check_leaks() {
 	std::cout << std::endl;
-	system("leaks -q span");
+	std::system("leaks -q span");
 }
 
 void printSpans(Span& s, unsigned int expect_short, unsigned int expect_long) {
@@ -15,6 +16,7 @@ void printSpans(Span& s, unsigned int expect_short, unsigned int expect_long) {
 }
 
 int main() {
+	std::atexit(&check_leaks);
 	Span			 span1 = Span(10);
 	std::vector<int> vec;
 	std::cout << "\n\n--> Test with an overflow with iterator" << std::endl;
@@ -29,7 +31,7 @@ int main() {
 		std::cout << "now try iterator" << std::endl;
 		span1.addNumbers(vec.begin(), vec.end());
 	} catch (std::exception& e) {
-		std::cout << e.what() << std::endl;
+		std::cout << "Caught exception: " << e.what() << std::endl;
 	}
 	printSpans(span1, 0, 90);
 
@@ -43,7 +45,7 @@ int main() {
 		span2.addNumber(11);
 		span2.addNumber(999999);
 	} catch (std::exception& e) {
-		std::cout << e.what() << std::endl;
+		std::cout << "Caught exception: " << e.what() << std::endl;
 	}
 	printSpans(span2, 2, 14);
 	std::cout << "\n\n--> Test with a short span object" << std::endl;
@@ -53,13 +55,13 @@ int main() {
 	try {
 		std::cout << tooShort.shortestSpan() << std::endl;
 	} catch (std::exception& e) {
-		std::cout << e.what() << std::endl;
+		std::cout << "Caught exception: " << e.what() << std::endl;
 	}
 
 	try {
 		std::cout << tooShort.longestSpan() << std::endl;
 	} catch (std::exception& e) {
-		std::cout << e.what() << std::endl;
+		std::cout << "Caught exception: " << e.what() << std::endl;
 	}
 
 	Span span3(100000);

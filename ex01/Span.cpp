@@ -2,13 +2,13 @@
 #include "Span.hpp"
 
 Span::Span() : max_n(0) {
-	std::cout << "Span::Span() called" << std::endl;
+	std::cout << "Default Span constructor called" << std::endl;
 }
 
 Span::Span(unsigned int n) : max_n(n) {}
 
 Span::Span(const Span &src) : max_n(src.max_n) {
-	std::cout << "Span::Span(const Span &) called" << std::endl;
+	std::cout << "Span copy constructor called" << std::endl;
 	*this = src;
 }
 
@@ -17,6 +17,8 @@ Span::~Span() {
 }
 
 Span &Span::operator=(Span const &rhs) {
+	if (this == &rhs)
+		return *this;
 	content = rhs.content;
 	return *this;
 }
@@ -42,7 +44,7 @@ unsigned int Span::shortestSpan() {
 	}
 	std::sort(content.begin(), content.end());
 	unsigned int min = content[1] - content[0];
-	for (size_t i = 0; i < content.size() - 1; i++) {
+	for (size_t i = 1; i < content.size() - 1; i++) {
 		unsigned int dif = content[i + 1] - content[i];
 		if (dif < min)
 			min = dif;
