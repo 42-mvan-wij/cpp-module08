@@ -24,7 +24,7 @@ class Span {
 				addNumber(*begin);
 				begin++;
 			}
-		};
+		}
 
 		class SpanFull : public std::exception {
 			virtual const char* what() const throw() { return "Span::SpanFull"; };

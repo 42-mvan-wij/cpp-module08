@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include "Span.hpp"
 
 Span::Span() : max_n(0) {
