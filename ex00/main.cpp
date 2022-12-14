@@ -63,7 +63,7 @@ int main() {
 
 		std::cout << "five = easyfind(const_v, 5)" << std::endl;
 		std::vector<int>::const_iterator five = easyfind(const_v, 5);
-		bool found = (five != v.end());
+		bool found = (five != const_v.end());
 		std::cout << "five found: " << found << std::endl;
 		if (found) {
 			std::cout << "*five: " << *five << std::endl;
